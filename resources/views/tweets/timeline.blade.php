@@ -8,6 +8,21 @@
         <div class="">
         <h5>{{$tweet->user->name}}</h5>
         <p>{{$tweet->tweet}}</p>
+       <div class="d-flex">
+         <div>
+            <form action="/tweet/{{$tweet->id}}/like" method="POST">
+                @csrf
+                <button class="btn btn-success" type="submit">Like {{$tweet->alllikes()}}</button>
+            </form>
+          </div>
+          <div>
+          <form action="/tweet/{{$tweet->id}}/dislike" method="post">
+          @csrf
+          @method('DELETE')
+            <button class="btn btn-danger ml-4" type="submit">DisLike {{$tweet->dislikes()}}</button>
+          </form>
+          </div>
+        </div>
         </div>
     </div>
     @endforeach

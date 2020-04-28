@@ -27,6 +27,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profiles/{user:username}/edit', 'ProfilesController@edit');
     Route::patch('/profiles/{user:username}/update', 'ProfilesController@update');
     Route::get('/test/{user:username}', 'ProfilesController@following');
+    Route::post('/tweet/{tweet}/like', 'LikesController@store');
+    Route::delete('/tweet/{tweet}/dislike', 'LikesController@destroy');
 
 });
 Route::get('/home', 'TweetsController@index')->name('home');
