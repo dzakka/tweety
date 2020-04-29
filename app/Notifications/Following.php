@@ -29,7 +29,7 @@ class Following extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -59,7 +59,8 @@ class Following extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            'follower' => $this->currentuser->name,
+            'following' => $this->user->name,
         ];
     }
 }

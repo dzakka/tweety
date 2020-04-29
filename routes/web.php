@@ -20,8 +20,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::middleware('auth')->group(function () {
-    Route::post('/tweet/create', 'TweetsController@store');
     Route::get('/profiles', 'ProfilesController@index');
+    Route::get('/home', 'TweetsController@index')->name('home');
+    Route::post('/tweet/create', 'TweetsController@store');
     Route::get('/profiles/{user:username}', 'ProfilesController@show');
     Route::post('/profiles/{user:username}/toggle', 'ProfilesController@toggle');
     Route::get('/profiles/{user:username}/edit', 'ProfilesController@edit');
@@ -32,7 +33,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/tweet/{tweet}/delete', 'TweetsController@destroy');
 
 });
-Route::get('/home', 'TweetsController@index')->name('home');
 
 // Route::get('/test', function () {
 //     return auth()->user()->();
