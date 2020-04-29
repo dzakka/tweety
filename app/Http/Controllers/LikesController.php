@@ -11,14 +11,24 @@ class LikesController extends Controller
 
     public function store(Tweet $tweet)
     {
-        $tweet->like(auth()->user());
+        if ($tweet->isliked(auth()->user())) {
+            $tweet->unlike(auth()->user());
+        } else {
+            $tweet->like(auth()->user());
+        }
+
         return back();
 
     }
     public function destroy(Tweet $tweet)
     {
+        if ($tweet->disliked(auth()->user())) {
+            $tweet->undislike(auth()->user());
+        } else {
+            $tweet->dislike(auth()->user());
 
-        $tweet->dislike(auth()->user());
+        }
+
         return back();
 
     }

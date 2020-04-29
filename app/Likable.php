@@ -31,13 +31,28 @@ trait Likable
 
     public function isliked(User $user)
     {
-        return (bool) $user->likes->where('user_id', $this->id)->where('liked', true)->count();
+        //return (bool) $user->likes->where('tweet_id', $this->id)->where('liked', true)->count();
+        return $this->likes()->where('user_id', $user->id)->exists();
 
     }
 
     public function disliked(User $user)
     {
-        return (bool) $user->likes->where('user_id', $this->id)->where('liked', false)->count();
+        //return (bool) $user->likes->where('tweet_id', $this->id)->where('liked', false)->count();
+        return $this->likes()->where('user_id', $user->id)->exists();
+
+    }
+
+    public function unlike(User $user)
+    {
+
+        return $this->likes()->where('user_id', $user->id)->delete($user);
+    }
+
+    public function undislike(User $user)
+    {
+
+        return $this->likes()->where('user_id', $user->id)->delete($user);
     }
 
     /*public function scopeWithLikes(Builder $query)
