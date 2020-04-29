@@ -36,5 +36,11 @@ class TweetsController extends Controller
 
         return back()->with('success', 'Awesome! your tweet was added to your timeline');
     }
+    public function destroy(Tweet $tweet)
+    {
+        $this->authorize('delete', $tweet);
+        Tweet::find($tweet)->first()->delete();
+        return back()->with('success', 'Your tweet has been deleted succesfully');
 
+    }
 }

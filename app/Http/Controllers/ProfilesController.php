@@ -50,7 +50,10 @@ class ProfilesController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users', Rule::unique('users')->ignore($user)],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
-        $validatedData['avatar'] = request('avatar')->store('avatar');
+        if (request('avatar')) {
+            $validatedData['avatar'] = request('avatar')->store('avatar');
+
+        }
         $validatedData['password'] = Hash::make(request('password'));
         $user->update($validatedData);
         return redirect('/profiles')->with('success', 'saved succss');

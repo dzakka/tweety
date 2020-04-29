@@ -42,4 +42,9 @@ class User extends Authenticatable
 
     }
 
+    // public function deletetweet(Tweet $tweet)
+    // {
+    //     return $this->timeline()->where('id', $tweet->id)->first()->delete($tweet->id);
+    // }
+
 }

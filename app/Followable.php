@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Follow;
+use App\Notifications\Following;
 
 trait Followable
 {
@@ -15,15 +16,18 @@ trait Followable
 
     public function follow(User $user)
     {
-        //My way of writing to follow the new user
-        //    Follow::create([
-        //         'user_id'=>$this->id,
-        //         'following_user_id'=>$user->id,
-        //     ])->save();
-        //     return true;
-        $this->authorize('follow', $user);
-        return $this->follows()->save($user);
-
+        /*My way of writing to follow the new user
+        Follow::create([
+        'user_id'=>$this->id,
+        'following_user_id'=>$user->id,
+        ])->save();
+        return true;
+         */
+        //Notification::send($user, new Following());
+        if ($this->follows()->save($user)) {
+            $user->notify(new Following(auth()->user(), $user));
+        }
+        return;
     }
 
     public function following(User $user)

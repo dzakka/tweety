@@ -29,10 +29,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/test/{user:username}', 'ProfilesController@following');
     Route::post('/tweet/{tweet}/like', 'LikesController@store');
     Route::delete('/tweet/{tweet}/dislike', 'LikesController@destroy');
+    Route::delete('/tweet/{tweet}/delete', 'TweetsController@destroy');
 
 });
 Route::get('/home', 'TweetsController@index')->name('home');
 
-Route::get('/test', function () {
-    return auth()->user()->timeline();
-});
+// Route::get('/test', function () {
+//     return auth()->user()->();
+// });
