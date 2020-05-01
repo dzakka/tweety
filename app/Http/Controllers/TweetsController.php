@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Tweet;
+use App\TweetImage;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -28,11 +29,24 @@ class TweetsController extends Controller
 
         $validatedData = request()->validate([
             'tweet' => 'required|max:255',
+            'image' => 'file',
+
         ]);
-        Tweet::Create([
+        if (Tweet::Create([
             'user_id' => auth()->user()->id,
             'tweet' => $validatedData['tweet'],
-        ]);
+        ])) {
+
+            $tweet = Tweet::where('tweet', $validatedData['tweet'])->first();
+            if (request('image')) {
+                $validatedData['image'] = request('image')->store('tweet_images');
+
+                TweetImage::create([
+                    'image' => $validatedData['image'],
+                    'tweet_id' => $tweet->id,
+                ]);
+            }
+        }
 
         return back()->with('success', 'Awesome! your tweet was added to your timeline');
     }

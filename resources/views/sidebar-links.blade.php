@@ -5,6 +5,9 @@
   <li class="nav-item">
       <a class="nav-link" href="/home">Home</a>
     </li>
+     <li class="nav-item">
+      <a class="nav-link" href="/notifications">Notifications</a>
+    </li>
     <li class="nav-item">
       <a class="nav-link" href="/profiles">Explore</a>
     </li>

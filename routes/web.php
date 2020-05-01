@@ -31,7 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/tweet/{tweet}/like', 'LikesController@store');
     Route::delete('/tweet/{tweet}/dislike', 'LikesController@destroy');
     Route::delete('/tweet/{tweet}/delete', 'TweetsController@destroy');
-
+    Route::get('/notifications', 'NotificationsController@index');
 });
 
 // Route::get('/test', function () {

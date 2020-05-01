@@ -8,6 +8,15 @@
         <div class="">
         <h5>{{$tweet->user->name}}</h5>
         <p>{{$tweet->tweet}}</p>
+
+        <div>
+          @foreach($tweet->tweetImages->pluck('image') as $image)
+          <img style="width:100px;"  src="/storage/{{$image}}">
+
+          @endforeach
+
+        </div>
+
         @can('delete', $tweet)
         <div style="float:right;">
           <form action="/tweet/{{$tweet->id}}/delete" method="POST">
